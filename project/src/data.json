@@ -250,5 +250,13 @@
       "method": "카드",
       "category": "교통"
     }
+  ],
+  "20251101": [
+    {
+      "amount": "-4500",
+      "description": "아침 편의점 커피",
+      "method": "카드",
+      "category": "식비"
+    }
   ]
 }
