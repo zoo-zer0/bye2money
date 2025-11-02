@@ -1,10 +1,5 @@
 import data from "../data.json"
-interface Transaction {
-  amount: string;
-  description: string;
-  method: string;
-  category: string;
-}
+import type { Transaction } from "../assets/types";
 const categoryClassMap: Record<string, string> = {
   "생활": "category-life",
   "식비": "category-food",
