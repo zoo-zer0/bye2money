@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Transaction } from "../assets/types";
-
+import InputMethod from "./Inputs/InputMethod";
 function InputDate({ date, setDate }: { date: Date; setDate: React.Dispatch<React.SetStateAction<Date>> }){
     
     return(<input 
@@ -43,17 +43,7 @@ function InputAmount({ amount, setAmount}: { amount: number | null; setAmount: R
 function InputDescription({ description, setDescription }: { description: string; setDescription: React.Dispatch<React.SetStateAction<string>> }){
   return(<input type="text" placeholder="입력하세요" value={description} onChange={(e)=> setDescription(e.target.value)}/>);
 }
-function InputMethod({method, setMethod}:{method: string, setMethod: React.Dispatch<React.SetStateAction<string>>}){
-    const methods = ["카드","현금","이체"];
-    return(
-        <select value={method} onChange={(e)=>setMethod(e.target.value)}>
-        <option value="">선택하세요</option>
-        {methods.map((m)=>(
-            <option key={m} value={m}>{m}</option>
-        ))}
-        </select>
-    );
-}
+
 function InputCategory({category, setCategory}: {category: string, setCategory: React.Dispatch<React.SetStateAction<string>>}){
   const categories = [
         "생활",
@@ -78,7 +68,7 @@ function InputCategory({category, setCategory}: {category: string, setCategory: 
     </select>
   );
 }
-export default function InputBar({ addTransaction }: {addTransaction:  (dateKey: string, transaction: Transaction)=>void}){
+export default function InputBar({ addTransaction, transactions }: {addTransaction:  (dateKey: string, transaction: Transaction)=>void, transactions:Record<string, Transaction[]>}){
     const [date, setDate] = useState(new Date());
     const [amount, setAmount] = useState<number | null>(null);
     const [description, setDescription] = useState("");
@@ -141,7 +131,7 @@ export default function InputBar({ addTransaction }: {addTransaction:  (dateKey:
           <td><InputDate date={date} setDate={setDate}/></td>
           <td><InputAmount amount={amount} setAmount={setAmount}/></td>
           <td><InputDescription description={description} setDescription={setDescription}/></td>
-          <td><InputMethod method={method} setMethod={setMethod}/></td>
+          <td><InputMethod method={method} setMethod={setMethod} transactions={transactions}/></td>
           <td><InputCategory category={category} setCategory={setCategory}/></td>
         </tr>
       </table>

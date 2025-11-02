@@ -44,7 +44,7 @@ export default function App() {
   return (
     <div className="App">
       <Header date={date} setDate={setDate} />
-      <InputBar addTransaction={addTransaction}/>
+      <InputBar addTransaction={addTransaction} transactions={data}/>
       <MonthlySum date={date} data={data} />
       <Transactions date={date} data={data} onDelete={handleDelete}/>
     </div>

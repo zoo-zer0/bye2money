@@ -34,13 +34,13 @@ function HeaderDateTitle({ date, setDate }: HeaderProps) {
 
   return (
     <div className = "HeaderDateTitle">
-      <button className="prevBtn" onClick={handlePrevMonth}>
+      <button style={{cursor: "pointer"}} className="prevBtn" onClick={handlePrevMonth}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M15 18L9 12L15 6" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </button>
       <HeaderDate date={date} setDate = {setDate}/>
-      <button className="nextBtn" onClick={handleNextMonth}>
+      <button style={{cursor: "pointer"}} className="nextBtn" onClick={handleNextMonth}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M9 6L15 12L9 18" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -51,13 +51,13 @@ function HeaderDateTitle({ date, setDate }: HeaderProps) {
 function Menu(){
   return (
     <div className="Menu">
-      <button className="transactions">
+      <button style={{cursor: "pointer"}} className="transactions">
         T
       </button>
-      <button className="graph">
+      <button style={{cursor: "pointer"}} className="graph">
         G
       </button>
-      <button className="calendar">
+      <button style={{cursor: "pointer"}} className="calendar">
         C
       </button>
     </div>
