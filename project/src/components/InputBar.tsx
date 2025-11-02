@@ -78,33 +78,28 @@ function InputCategory({category, setCategory}: {category: string, setCategory: 
     </select>
   );
 }
-export default function InputBar({ setData }: {setData:  React.Dispatch<React.SetStateAction<Record<string, Transaction[]>>>}){
+export default function InputBar({ addTransaction }: {addTransaction:  (dateKey: string, transaction: Transaction)=>void}){
     const [date, setDate] = useState(new Date());
     const [amount, setAmount] = useState<number | null>(null);
     const [description, setDescription] = useState("");
     const [method, setMethod] = useState("");
     const [category, setCategory] = useState("");
-    const handleSubmit = () =>{
+    const handleSubmit = async () =>{
         if(!date||!amount || !description || !method || !category){
             alert("모든 항목을 입력하세요.");
             return;
         }
         //needed because data.json is formated as string
-        const key = `${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, "0")}${String(date.getDate()).padStart(2, "0")}`;
-        const newTransaction = { amount, description, method, category };
-        setData((prev)=>{
-            const existing = prev[key] || [];
-            return {
-                ...prev,
-                [key]: [...existing, newTransaction],
-            };
-        });
-        setDate(new Date());
-        setAmount(null);
-        setDescription("");
-        setMethod("");
-        setCategory("");
-    }
+        const dateKey = `${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, "0")}${String(date.getDate()).padStart(2, "0")}`;
+        const transaction = {amount, description, method, category};
+        addTransaction(dateKey, transaction);
+
+            setDate(new Date());
+            setAmount(null);
+            setDescription("");
+            setMethod("");
+            setCategory("");
+    };
   return (
     <div className="InputBar">
       <table>

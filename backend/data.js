@@ -1,4 +1,4 @@
-{
+export const transactions =  {
   "20250801": [
     {
       "amount": -4500,

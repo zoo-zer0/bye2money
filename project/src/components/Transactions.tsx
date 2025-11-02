@@ -1,4 +1,3 @@
-import data from "../data.json"
 import type { Transaction } from "../assets/types";
 const categoryClassMap: Record<string, string> = {
   "생활": "category-life",
@@ -15,11 +14,10 @@ const categoryClassMap: Record<string, string> = {
 
 
 //could try to divide this up next time
-export default function Transactions({ date }: { date: Date }) {
-  const year = date.getFullYear();
+export default function Transactions({ date, data }: { date: Date, data: Record<string, Transaction[]> }) {
+    const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const monthPrefix = `${year}${month}`; // e.g. "202510"
-
   // Filter keys that match the given month
   const filtered = Object.entries(data)
     .filter(([key]) => key.startsWith(monthPrefix))
