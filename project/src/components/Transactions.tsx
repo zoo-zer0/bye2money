@@ -15,7 +15,7 @@ const categoryClassMap: Record<string, string> = {
 
 
 //could try to divide this up next time
-export default function Transactions({ date, data, onDelete }: { date: Date, data: Record<string, Transaction[]>, onDelete:(dateKey: string, transactionIndex:number)=>void }) {
+export default function Transactions({ date, data, onDelete, showIncome, showExpense }: { date: Date, data: Record<string, Transaction[]>, onDelete:(dateKey: string, transactionIndex:number)=>void, showIncome: boolean, showExpense: boolean }) {
     const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const monthPrefix = `${year}${month}`; // e.g. "202510"
@@ -34,11 +34,11 @@ export default function Transactions({ date, data, onDelete }: { date: Date, dat
             <h3>
               {key.slice(4, 6)}월 {key.slice(6, 8)}일
             </h3>
-            <DailySum dateKey={key} transactions={data}/>
+            <DailySum dateKey={key} transactions={data} showExpense={showExpense} showIncome={showIncome}/>
             <table>
               <tbody>
                 {entries.map((t: Transaction, i: number) => (
-                  <tr key={i} className="transaction-row">
+                  <tr key={i} className="transaction-row" style={{opacity:(t.amount > 0 && !showIncome) || (t.amount < 0 && !showExpense) ? 0.1 :1}}>
                     <th className={categoryClassMap[t.category] || "category-default"}>
                       {t.category}
                     </th>

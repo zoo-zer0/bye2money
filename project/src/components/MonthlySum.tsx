@@ -1,5 +1,6 @@
 import type { Transaction } from "../assets/types";
-export default function MonthlySum({date, data}:{date: Date, data: Record<string, Transaction[]>}){
+
+export default function MonthlySum({date, data, showIncome, setShowIncome, showExpense, setShowExpense}:{date: Date, data: Record<string, Transaction[]>, showIncome: boolean, setShowIncome:React.Dispatch<React.SetStateAction<boolean>>, showExpense: boolean, setShowExpense:React.Dispatch<React.SetStateAction<boolean>>}){
     const year = date.getFullYear();
     const month = String(date.getMonth()+1).padStart(2,"0");
     const monthPrefix = `${year}${month}`;
@@ -15,13 +16,13 @@ export default function MonthlySum({date, data}:{date: Date, data: Record<string
     return(
         <div style={{marginRight:"200px", display: "flex", alignItems: "center", gap: "16px", justifyContent: "flex-end" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                <button
+                <button onClick={()=>setShowIncome(prev=>!prev)}
                     style={{
                     width: "24px",
                     height: "24px",
                     borderRadius: "25%",
                     border: "none",
-                    backgroundColor: "#454545ff",
+                    backgroundColor: showIncome ? "#454545ff":"#aaa",
                     color: "white",
                     fontWeight: "bold",
                     cursor: "pointer",
@@ -47,13 +48,13 @@ export default function MonthlySum({date, data}:{date: Date, data: Record<string
                 <p>수입: {income.toLocaleString()}원</p>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                <button
+                <button onClick={()=>setShowExpense((prev: boolean)=>!prev)}
                     style={{
                     width: "24px",
                     height: "24px",
                     borderRadius: "25%",
                     border: "none",
-                    backgroundColor: "#454545ff", 
+                    backgroundColor: showExpense ? "#454545ff":"#aaa",
                     color: "white",
                     fontWeight: "bold",
                     cursor: "pointer",

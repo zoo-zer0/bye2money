@@ -6,7 +6,8 @@ import InputBar from "./components/InputBar";
 import Transactions from "./components/Transactions";
 import MonthlySum from "./components/MonthlySum";
 export default function App() {
-  
+  const [showIncome, setShowIncome] = useState(true);
+  const [showExpense, setShowExpense] = useState(true);
   const [date, setDate] = useState(new Date());
   const [data, setData] = useState<Record<string, Transaction[]>>({});
   useEffect(()=>{
@@ -45,8 +46,8 @@ export default function App() {
     <div className="App">
       <Header date={date} setDate={setDate} />
       <InputBar addTransaction={addTransaction} transactions={data}/>
-      <MonthlySum date={date} data={data} />
-      <Transactions date={date} data={data} onDelete={handleDelete}/>
+      <MonthlySum date={date} data={data} showIncome={showIncome} setShowIncome={setShowIncome} showExpense={showExpense} setShowExpense={setShowExpense}/>
+      <Transactions date={date} data={data} onDelete={handleDelete} showExpense={showExpense} showIncome={showIncome}/>
     </div>
   );
 }
