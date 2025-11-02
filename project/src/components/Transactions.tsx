@@ -1,4 +1,5 @@
 import type { Transaction } from "../assets/types";
+import DailySum from "./DailySum";
 const categoryClassMap: Record<string, string> = {
   "생활": "category-life",
   "식비": "category-food",
@@ -33,6 +34,7 @@ export default function Transactions({ date, data }: { date: Date, data: Record<
             <h3>
               {key.slice(4, 6)}월 {key.slice(6, 8)}일
             </h3>
+            <DailySum dateKey={key} transactions={data}/>
             <table>
               <tbody>
                 {entries.map((t: Transaction, i: number) => (
