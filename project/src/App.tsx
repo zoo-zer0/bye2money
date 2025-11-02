@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import InputBar from "./components/InputBar";
 import Transactions from "./components/Transactions";
-
+import MonthlySum from "./components/MonthlySum";
 export default function App() {
   
   const [date, setDate] = useState(new Date());
@@ -30,6 +30,7 @@ export default function App() {
     <div className="App">
       <Header date={date} setDate={setDate} />
       <InputBar addTransaction={addTransaction}/>
+      <MonthlySum date={date} data={data} />
       <Transactions date={date} data={data}/>
     </div>
   );

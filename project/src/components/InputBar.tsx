@@ -106,7 +106,35 @@ export default function InputBar({ addTransaction }: {addTransaction:  (dateKey:
         <tr>
           <th>일자</th><th>금액</th><th>내용</th><th>결제수단</th><th>분류</th>
           <td rowSpan={2} style={{ verticalAlign: "middle", textAlign: "center" }}>
-            <button onClick={handleSubmit}>Submit</button>
+                <button onClick={handleSubmit}
+                    style={{
+                    width: "48px",
+                    height: "48px",
+                    borderRadius: "50%",
+                    border: "none",
+                    backgroundColor: "#454545ff", 
+                    color: "white",
+                    fontWeight: "bold",
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    }}
+                >
+                      <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="36"
+                            height="36"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="white"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        >
+                            <path d="M5 13l4 4L19 7" />
+                        </svg>
+                </button>
           </td>
         </tr>
         <tr>
