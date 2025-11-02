@@ -27,6 +27,24 @@ app.post("/api/transactions", (req, res) => {
   }
   transactions[date].push(transaction);
 });
+// DELETE a transaction
+// expects JSON body: { date: "20250801", index: 0 }
+app.delete("/api/transactions", (req, res) => {
+  const { date, index } = req.body;
+
+  if (!date || index === undefined) {
+    return res.status(400).json({ error: "date and index required" });
+  }
+
+  if (!transactions[date] || !transactions[date][index]) {
+    return res.status(404).json({ error: "Transaction not found" });
+  }
+
+  // remove the transaction at the given index
+  transactions[date].splice(index, 1);
+
+  res.json({ success: true, transactions: transactions[date] });
+});
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);

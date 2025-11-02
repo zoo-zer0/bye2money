@@ -26,12 +26,27 @@ export default function App() {
       body: JSON.stringify({date: dateKey, transaction}),
     });
   };
+  const handleDelete = (dateKey: string, index: number)=>{
+    setData(prev=>{
+      const updatedDay = [...(prev[dateKey]||[])];
+      updatedDay.splice(index,1);
+      return{
+        ...prev,
+        [dateKey]: updatedDay,
+      };
+    });
+    fetch("http://localhost:3001/api/transactions",{
+      method: "DELETE",
+      headers:{"Content-Type": "application/json"},
+      body: JSON.stringify({date:dateKey, index}),
+    })
+  }
   return (
     <div className="App">
       <Header date={date} setDate={setDate} />
       <InputBar addTransaction={addTransaction}/>
       <MonthlySum date={date} data={data} />
-      <Transactions date={date} data={data}/>
+      <Transactions date={date} data={data} onDelete={handleDelete}/>
     </div>
   );
 }

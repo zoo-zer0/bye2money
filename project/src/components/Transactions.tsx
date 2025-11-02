@@ -15,7 +15,7 @@ const categoryClassMap: Record<string, string> = {
 
 
 //could try to divide this up next time
-export default function Transactions({ date, data }: { date: Date, data: Record<string, Transaction[]> }) {
+export default function Transactions({ date, data, onDelete }: { date: Date, data: Record<string, Transaction[]>, onDelete:(dateKey: string, transactionIndex:number)=>void }) {
     const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const monthPrefix = `${year}${month}`; // e.g. "202510"
@@ -38,13 +38,16 @@ export default function Transactions({ date, data }: { date: Date, data: Record<
             <table>
               <tbody>
                 {entries.map((t: Transaction, i: number) => (
-                  <tr key={i}>
+                  <tr key={i} className="transaction-row">
                     <th className={categoryClassMap[t.category] || "category-default"}>
                       {t.category}
                     </th>
                     <td className="description">{t.description}</td>
                     <td>{t.method}</td>
-                    <td className="amount">{Number(t.amount).toLocaleString()}원</td>
+                    <td className="amount-container">
+                        <span style={{transition:"transform 0.2s ease"}}>{Number(t.amount).toLocaleString()}원</span>
+                        <button className="delete-btn" onClick={()=>onDelete(key, i)}>삭제</button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
